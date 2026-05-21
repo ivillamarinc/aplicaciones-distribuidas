@@ -1,0 +1,370 @@
+\documentclass[12pt,a4paper]{article}
+
+%%%%%%%%%%%%%%%%%%%%%%
+% PAQUETES
+%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel}
+
+\usepackage[a4paper,
+left=2.5cm,
+right=2.5cm,
+top=2.5cm,
+bottom=2.5cm]{geometry}
+
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{tcolorbox}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{setspace}
+
+\setstretch{1.2}
+
+%%%%%%%%%%%%%%%%%%%%%%
+% COLOR INSTITUCIONAL
+%%%%%%%%%%%%%%%%%%%%%%
+
+\definecolor{uteqblue}{RGB}{0,76,153}
+
+%%%%%%%%%%%%%%%%%%%%%%
+% ENCABEZADO
+%%%%%%%%%%%%%%%%%%%%%%
+
+\pagestyle{fancy}
+\fancyhf{}
+
+\fancyhead[L]{\small UTEQ}
+\fancyhead[C]{\small Aplicaciones Distribuidas}
+\fancyhead[R]{\small TA-IND-01}
+
+\fancyfoot[C]{\thepage}
+
+\renewcommand{\headrulewidth}{0.6pt}
+
+%%%%%%%%%%%%%%%%%%%%%%
+% TITULOS
+%%%%%%%%%%%%%%%%%%%%%%
+
+\titleformat{\section}
+{\Large\bfseries\color{uteqblue}}
+{\thesection.}
+{0.5em}
+{}
+
+%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%% PORTADA %%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{titlepage}
+
+\centering
+
+{\small
+Facultad de Ciencia de la Computación y Diseño Digital
+\hspace{0.3cm} • \hspace{0.3cm}
+Carrera de Software
+}
+
+\vspace{2cm}
+
+\begin{tcolorbox}[   % <- AQUÍ estaba el error
+width=12cm,
+colframe=uteqblue,
+colback=white,
+arc=2mm]
+
+\centering
+
+\textbf{\color{uteqblue} ASIGNATURA}
+
+Aplicaciones Distribuidas
+
+\vspace{0.3cm}
+\rule{6cm}{0.3pt}
+
+\vspace{0.3cm}
+
+\textbf{\color{uteqblue} ACTIVIDAD}
+
+TA-IND-01
+
+
+\vspace{0.5cm}
+
+\Large
+\textbf{
+ANÁLISIS CRÍTICO\\
+COMPARATIVO DE\\
+GOOGLE DRIVE
+}
+
+\vspace{0.5cm}
+
+\rule{6cm}{0.3pt}
+
+\vspace{0.5cm}
+
+\textbf{\color{uteqblue} DOCENTE}
+
+ING. GUERRERO ULLOA\\
+GLEISTON CICERON
+
+
+\vspace{0.5cm}
+
+\textbf{\color{uteqblue} ESTUDIANTE}
+
+VILLAMARIN CUENCA\\
+IVAN ANDRES
+
+
+\vspace{0.5cm}
+
+\textbf{\color{uteqblue} AÑO LECTIVO}
+
+2025 - 2026 PPA
+
+\end{tcolorbox}
+
+
+\vfill
+
+\textbf{\color{uteqblue}
+UNIVERSIDAD TÉCNICA ESTATAL DE QUEVEDO
+}
+
+\vspace{1cm}
+
+\rule{10cm}{0.5pt}
+
+\vspace{1cm}
+
+
+
+\end{titlepage}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%% INDICE %%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\tableofcontents
+
+\newpage
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%% CONTENIDO %%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Introducción}
+
+Google Drive es un servicio de almacenamiento en la nube que permite guardar, compartir y acceder a archivos desde distintos dispositivos con conexión a internet. Aunque para el usuario funciona como una herramienta sencilla, detrás de su operación existe una infraestructura compuesta por múltiples servidores distribuidos en diferentes ubicaciones. Esta arquitectura permite mantener la información disponible, sincronizar cambios entre dispositivos y recuperar datos ante posibles fallos.\vspace{0.5cm}
+
+Por estas características, Google Drive puede considerarse un sistema distribuido, ya que el procesamiento y almacenamiento de la información no dependen de un único servidor. En su lugar, utiliza replicación, comunicación entre nodos y mecanismos de tolerancia a fallos para asegurar continuidad del servicio. Esto permite que los usuarios accedan a sus archivos con normalidad incluso cuando ocurren interrupciones parciales en la infraestructura.
+
+
+
+\section{Transparencia de distribución}
+
+En sistemas de almacenamiento en la nube permite que los usuarios accedan a archivos sin conocer dónde están almacenados físicamente ni cuántas copias existen para garantizar disponibilidad. En servicios similares a Google Drive, esta característica simplifica la experiencia de uso, ya que el acceso parece inmediato y uniforme, aunque internamente intervengan múltiples servidores, procesos de replicación y mecanismos de sincronización. Sin embargo, mantener esta transparencia implica equilibrar disponibilidad, rendimiento y consistencia de los datos distribuidos. Diversos estudios coinciden en que la replicación distribuida mejora la tolerancia a fallos porque permite recuperar información desde otros nodos cuando ocurre una interrupción.  [1], [2].
+
+\vspace{0.5cm}
+Aumentar redundancia y sincronización entre servidores incrementa la complejidad operativa y puede generar retrasos temporales antes de reflejar cambios en todos los dispositivos conectados. Esto evidencia que la transparencia percibida por el usuario depende de procesos internos complejos destinados a mantener continuidad del servicio. Aunque la transparencia de distribución mejora accesibilidad y colaboración en plataformas cloud, también puede ocultar aspectos relacionados con privacidad, integridad y control sobre la información almacenada. Por ello, investigaciones recientes sugieren complementar la facilidad de uso con métodos de auditoría y protección que permitan mayor confianza sin afectar el rendimiento del sistema [3], [4].
+
+\vspace{0.5cm}
+
+\textbf{Opinión crítica}
+
+La transparencia de distribución hace que herramientas como Google Drive sean fáciles de usar porque permiten guardar o abrir archivos sin preocuparse por servidores, ubicaciones o copias de respaldo. Por otra parte, esta simplicidad puede generar la percepción de que el acceso es inmediato y totalmente seguro, cuando en realidad depende de procesos complejos de sincronización, replicación y protección de datos. Desde una visión objetiva ocultar estos procesos mejora la experiencia del usuario, pero también incrementa la dependencia hacia el proveedor del servicio y reduce el conocimiento sobre cómo se gestionan realmente los datos almacenados. Comprender esto ayuda a reconocer que la facilidad de uso en sistemas distribuidos suele estar acompañada de decisiones técnicas y compromisos que el usuario no observa directamente.
+
+
+\section{Modelo CAP}
+
+Establece que un sistema distribuido no puede garantizar al mismo tiempo consistencia (Consistency), disponibilidad (Availability) y tolerancia a particiones (Partition Tolerance) cuando ocurren fallos de comunicación entre nodos. Con Google Drive, esto implica que el servicio debe equilibrar mantener los archivos accesibles desde cualquier dispositivo y asegurar que todos los cambios realizados se reflejen inmediatamente. Varios estudios indican que las plataformas cloud suelen priorizar continuidad del servicio y sincronización progresiva antes que consistencia absoluta en tiempo real, permitiendo que los usuarios sigan accediendo a sus datos aun durante interrupciones parciales de red [5], [6].
+
+\vspace{0.5cm}
+
+En servicios como Google Drive, la disponibilidad y la tolerancia a particiones resultan fundamentales porque los usuarios esperan acceder a sus archivos desde distintos lugares y dispositivos incluso si existen fallos temporales en algunos servidores. Para lograrlo, el sistema emplea replicación y almacenamiento distribuido, aunque esto puede ocasionar retrasos breves antes de que una modificación aparezca sincronizada completamente. Este comportamiento refleja uno de los compromisos del modelo CAP: mantener acceso continuo al servicio puede requerir reducir temporalmente la consistencia inmediata entre nodos distribuidos. Esto significa que algunas operaciones pueden requerir mayor consistencia para evitar conflictos en archivos compartidos, mientras otras priorizan rapidez y disponibilidad para mejorar la experiencia del usuario. Por ello, pequeños retrasos de sincronización no siempre representan fallos, sino decisiones técnicas orientadas a preservar estabilidad, acceso continuo y tolerancia ante interrupciones de red [7], [8].
+
+\vspace{0.5cm}
+
+\textbf{Opinión crítica}
+
+Google Drive muestra que en un sistema distribuido no siempre es posible mantener sincronización inmediata y disponibilidad al mismo tiempo. Por ello, algunos retrasos al actualizar archivos entre dispositivos no representan errores, sino decisiones para asegurar que el servicio siga funcionando adecuadamente. Esto evidencia que la facilidad de uso en plataformas cloud depende de un equilibrio entre acceso continuo, rapidez y consistencia de los datos.
+
+
+\section{Modelos de comunicación}
+
+El intercambio de información ocurre principalmente mediante un modelo cliente-servidor, donde los dispositivos del usuario envían solicitudes para almacenar, modificar o recuperar archivos desde servidores distribuidos. Este proceso se complementa con APIs y servicios internos que permiten sincronizar información entre distintos equipos sin que el usuario intervenga directamente. Estos mecanismos favorecen escalabilidad y acceso continuo, especialmente cuando múltiples usuarios interactúan simultáneamente con los mismos datos [9], [10].
+
+\vspace{0.5cm}
+
+La sincronización en el sistema de Google Drive busca mantener actualizados los archivos entre diferentes dispositivos, aunque este proceso no siempre ocurre de forma inmediata. Las investigaciones que se realizaron arrojaron que mantener sincronización constante mejora coherencia de los datos, pero también incrementa consumo de recursos y complejidad del sistema. Por ello, muchas plataformas cloud emplean sincronización progresiva o parcial, permitiendo que las actualizaciones aparezcan gradualmente mientras el servicio permanece disponible. La importancia de la comunicación asíncrona en Google Drive permite continuar utilizando el servicio sin esperar que todos los procesos terminen al mismo tiempo. Esto reduce bloqueos y mejora rendimiento cuando existen muchos usuarios o retrasos de red. Este comportamiento evidencia que la rapidez y continuidad del servicio suelen priorizarse sobre una actualización inmediata en todos los nodos distribuidos [11], [12].
+
+\vspace{0.5cm}
+
+\textbf{Opinión crítica}
+
+Google Drive demuestra que los modelos de comunicación distribuidos buscan mantener el servicio disponible y fácil de usar, incluso cuando la sincronización entre dispositivos no ocurre inmediatamente. De otra manera, pequeños retrasos pueden parecer errores, muchas veces son consecuencia de procesos asíncronos diseñados para evitar bloqueos y mejorar el rendimiento. Esto evidencia que la rapidez de acceso y continuidad del servicio suelen priorizarse sobre la actualización instantánea de todos los datos.
+
+
+\section{Tolerancia a fallos}
+
+Permite que los archivos continúen disponibles incluso cuando uno o varios servidores presentan interrupciones. Esto es posible gracias a la replicación, donde múltiples copias de la información se almacenan en diferentes nodos o ubicaciones. Diversos estudios coinciden en que esta redundancia mejora disponibilidad y recuperación del servicio, reduciendo el riesgo de pérdida de información ante fallos parciales de infraestructura. Google Drive depende de centros de datos distribuidos geográficamente para mantener continuidad operativa. Cuando ocurre una falla en una ubicación, otras copias almacenadas permiten recuperar información y seguir ofreciendo acceso a los usuarios. Investigaciones recientes indican que la redundancia geográfica incrementa confiabilidad y disminuye interrupciones, aunque también aumenta complejidad administrativa y costos asociados al almacenamiento y mantenimiento del sistema [13], [14].
+
+\vspace{0.5cm}
+La recuperación automática constituye otro elemento importante en la tolerancia a fallos, ya que permite restaurar acceso a la información sin intervención directa del usuario. En plataformas como Google Drive, estos mecanismos ayudan a mantener estabilidad del servicio frente a errores temporales o caídas de servidores. Por otra parte, aumentar redundancia para mejorar recuperación también implica mayor consumo de recursos, evidenciando que la alta disponibilidad suele requerir compromisos entre rendimiento, costos y complejidad operativa [15], [16].
+
+\vspace{0.5cm}
+
+\textbf{Opinión crítica}
+
+La tolerancia a fallos en Google Drive permite que los usuarios continúen accediendo a sus archivos aun cuando ocurren errores o caídas en algunos servidores. Aunque esta redundancia mejora disponibilidad y seguridad de la información, también requiere más recursos y una infraestructura más compleja. Esto nos da a entender que mantener un servicio estable no depende solo de evitar fallos, sino de contar con mecanismos capaces de recuperarse rápidamente cuando estos ocurren.
+
+\section{Comparación crítica}
+
+\begin{table}[h]
+\centering
+
+\begin{tabular}{|p{4cm}|p{5cm}|p{5cm}|}
+
+\hline
+
+Aspecto &
+Google Drive &
+Dropbox
+
+\\ \hline
+
+Transparencia &
+Oculta ubicación &
+Oculta infraestructura
+
+\\ \hline
+
+Modelo CAP &
+Disponibilidad +
+tolerancia &
+Sincronización rápida
+
+\\ \hline
+
+Comunicación &
+APIs +
+cliente-servidor &
+Cliente-servidor
+
+\\ \hline
+
+Tolerancia &
+Replicación geográfica &
+Replicación distribuida
+
+\\ \hline
+
+\end{tabular}
+
+\end{table}
+\vspace{0.5cm}
+Google Drive y Dropbox utilizan sistemas distribuidos para almacenar información en varios servidores, permitiendo acceder a archivos desde distintos dispositivos sin conocer dónde se encuentran físicamente. Ambos mantienen disponibilidad mediante replicación de datos, aunque Google Drive destaca por integrar colaboración y edición compartida en tiempo real.
+
+\vspace{0.5cm}
+En cuanto al modelo CAP, los dos servicios priorizan disponibilidad y tolerancia a fallos para evitar interrupciones. Sin embargo, mantener acceso continuo puede ocasionar pequeños retrasos antes de que los cambios aparezcan en todos los dispositivos, evidenciando que la sincronización inmediata no siempre es la prioridad.
+
+\vspace{0.5cm}
+Google Drive sobresale por facilitar trabajo colaborativo, mientras Dropbox se enfoca más en almacenamiento y sincronización simple. Esto demuestra que los sistemas distribuidos deben equilibrar disponibilidad, rapidez y recuperación ante fallos, ya que mejorar una característica generalmente incrementa la complejidad interna del sistema.
+
+
+\section{Aplicación al proyecto final de curso del equipo.}
+
+Para el Sistema de Control de Laboratorios Informáticos (SCLI) se puede tomar varios elementos analizados en Google Drive. De la transparencia de distribución, considerar que el usuario reserve equipos o consulte información sin conocer dónde se almacenan los datos. Del modelo CAP, priorizar disponibilidad para que docentes o estudiantes accedan al sistema incluso ante fallos temporales. De los modelos de comunicación, usar sincronización entre módulos (reservas, horarios, usuarios) y APIs para intercambio de información. Por último, la tolerancia a fallos, para implementar copias de seguridad, recuperación automática y almacenamiento redundante y evitar pérdida de registros. Esto complementaria a que el sistema sea más estable, accesible y confiable durante el uso cotidiano.
+
+
+\section{Conclusión}
+
+El análisis de Google Drive nos permite entender que los sistemas distribuidos están diseñados para mantener los archivos disponibles y seguir funcionando incluso cuando ocurren errores o fallos en algunos servidores. Aunque para el usuario el acceso parece rápido y sencillo, detrás existen procesos como sincronización, replicación y recuperación automática que ayudan a evitar interrupciones. Esto demuestra que ningún sistema puede ofrecer al mismo tiempo máxima rapidez, actualización inmediata y disponibilidad total, por lo que siempre debe existir un equilibrio entre estas características para mantener un servicio estable.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%% BIBLIOGRAFIA %%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newpage
+
+\section*{Bibliografía}
+
+\addcontentsline{toc}{section}{Bibliografía}
+
+[1]	R. A. Campêlo, M. A. Casanova, D. O. Guedes, and A. H. F. Laender, “A brief survey on replica consistency in cloud environments,” Journal of Internet Services and Applications 2020 11:1, vol. 11, no. 1, pp. 1-, Feb. 2020, doi: 10.1186/S13174-020-0122-Y.
+
+
+\vspace{0.3cm}
+[2]	L. Holzbaur, S. Kruglik, A. Frolov, and A. Wachter-Zeh, “Secrecy and Accessibility in Distributed Storage,” Proceedings - IEEE Global Communications Conference, GLOBECOM, 2020, doi: 10.1109/GLOBECOM42002.2020.9322434.
+
+\vspace{0.3cm}
+[3]	F. Hörandner, S. Ramacher, and · Simon Roth, “Selective end-to-end data-sharing in the cloud,” Journal of Banking and Financial Technology 2020 4:1, vol. 4, no. 1, pp. 139–157, Jul. 2020, doi: 10.1007/S42786-020-00017-Y.
+
+
+\vspace{0.3cm}
+[4]	L. Li and J. Liu, “SecACS: Enabling lightweight secure auditable cloud storage with data dynamics,” Journal of Information Security and Applications, vol. 54, p. 102545, Oct. 2020, doi: 10.1016/J.JISA.2020.102545.
+
+\vspace{0.3cm}
+[5]	B. H. Kim and Y. Yoon, “Cloud Storage Service Architecture Providing the Eventually Consistent Totally Ordered Commit History of Distributed Key-Value Stores for Data Consistency Verification,” Electronics 2021, Vol. 10, Page 2702, vol. 10, no. 21, p. 2702, Nov. 2021, doi: 10.3390/ELECTRONICS10212702.
+
+\vspace{0.3cm}
+[6]	A. Khelaifa, S. Benharzallah, L. Kahloul, R. Euler, A. Laouid, and A. Bounceur, “A comparative analysis of adaptive consistency approaches in cloud storage,” J. Parallel Distrib. Comput., vol. 129, pp. 36–49, Jul. 2019, doi: 10.1016/J.JPDC.2019.03.006.
+
+\vspace{0.3cm}
+[7]	LaputGierad, “The power of two,” XRDS: Crossroads, The ACM Magazine for Students, vol. 26, no. 2, pp. 5–6, Nov. 2019, doi: 10.1145/3372298.
+
+\vspace{0.3cm}
+[8]	R. Taft et al., “CockroachDB: The Resilient Geo-Distributed SQL Database,” Proceedings of the ACM SIGMOD International Conference on Management of Data, pp. 1493–1509, Jun. 2020, doi: 10.1145/3318464.3386134;JOURNAL:JOURNAL:
+\vspace{0.3cm}ACMCONFERENCES;
+{0.3cm}PAGEGROUP:STRING:PUBLICATION.
+
+\vspace{0.3cm}
+[9]	D. Dai, Y. Chen, D. Kimpe, and R. B. Ross, “Trigger-Based Incremental Data Processing with Unified Sync and Async Model,” IEEE Transactions on Cloud Computing, vol. 9, no. 1, pp. 372–385, Jan. 2021, doi: 10.1109/TCC.2018.2830348.
+
+\vspace{0.3cm}
+[10]	P. Fan, J. Liu, W. Yin, H. Wang, X. Chen, and H. Sun, “2PC*: a distributed transaction concurrency control protocol of multi-microservice based on cloud computing platform,” Journal of Cloud Computing 2020 9:1, vol. 9, no. 1, pp. 40-, Jul. 2020, doi: 10.1186/S13677-020-00183-W.
+
+\vspace{0.3cm}
+[11]	P. Puschner and R. Kirner, “Asynchronous vs. synchronous interfacing to time-triggered communication systems,” Journal of Systems Architecture, vol. 103, p. 101690, Feb. 2020, doi: 10.1016/J.SYSARC.2019.101690.
+
+\vspace{0.3cm}
+[12]	I. Sinitsyn, A. Mironov, Y. Vorontsov, N. Borzykh, and E. Mikhailova, “The principles of synchronization in the distributed information systems,” Economic Annals-XXI, vol. 183, no. 5–6, pp. 79–88, Jun. 2020, doi: 10.21003/EA.V183-08.
+
+\vspace{0.3cm}
+[13]	J. Liu et al., “A Low-Cost Multi-Failure Resilient Replication Scheme for High-Data Availability in Cloud Storage,” IEEE/ACM Transactions on Networking, vol. 29, no. 4, pp. 1436–1451, Aug. 2021, doi: 10.1109/TNET.2020.3027814.
+
+\vspace{0.3cm}
+[14]	K. Sonbol, Ö. Özkasap, I. Al-Oqily, and M. Aloqaily, “EdgeKV: Decentralized, scalable, and consistent storage for the edge,” J. Parallel Distrib. Comput., vol. 144, pp. 28–40, Oct. 2020, doi: 10.1016/J.JPDC.2020.05.009.
+
+\vspace{0.3cm}
+[15]	S. Ahmed, M. Nahiduzzaman, T. Islam, F. H. Bappy, T. S. Zaman, and R. Hasan, “FASTEN: Towards a FAult-tolerant and STorage EfficieNt Cloud: Balancing Between Replication and Deduplication,” Proceedings - IEEE Consumer Communications and Networking Conference, CCNC, pp. 44–50, Dec. 2023, doi: 10.1109/CCNC51664.2024.10454894.
+
+\vspace{0.3cm}
+[16]	H. Benkaouha, “A stable storage in MANET: Replication or distributed storage,” J. Comput. Sci., vol. 45, p. 101196, Sep. 2020, doi: 10.1016/J.JOCS.2020.101196.
+ 
+
+
+\vspace{1cm}
+
+\textbf{Repositorio GitHub}
+
+\url{https://github.com/ivillamarinc/aplicaciones-distribuidas}
+
+
+
+\end{document}
