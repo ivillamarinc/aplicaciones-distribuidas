@@ -1,0 +1,675 @@
+\documentclass[12pt,a4paper]{article}
+
+
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel}
+
+\usepackage[
+left=2.5cm,
+right=2.5cm,
+top=3cm,
+bottom=2.8cm
+]{geometry}
+
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{setspace}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{tabularx}
+\usepackage{tcolorbox}
+\usepackage{hyperref}
+\usepackage{tikz}
+\usepackage{array}
+\usepackage{float}
+\usepackage{tocloft}
+\usepackage{titling}
+\usepackage{colortbl}
+
+
+
+\usepackage[
+backend=biber,
+style=ieee
+]{biblatex}
+
+\addbibresource{referencias.bib}
+
+
+
+\usepackage{newtxtext,newtxmath}
+
+
+
+\definecolor{uteqBlue}{RGB}{20,60,120}
+\definecolor{lightBlue}{RGB}{235,242,255}
+\definecolor{softGray}{RGB}{245,245,245}
+
+
+
+\onehalfspacing
+\setlength{\parindent}{1.27cm}
+
+
+
+\pagestyle{fancy}
+
+\fancyhf{}
+
+\fancyhead[L]{
+\small\bfseries
+\color{uteqBlue}
+APLICACIONES DISTRIBUIDAS
+}
+
+\fancyhead[R]{
+\small\bfseries
+\color{uteqBlue}
+UTEQ-FCCDD
+}
+
+\fancyfoot[C]{\thepage}
+
+\renewcommand{\headrulewidth}{1pt}
+
+\renewcommand{\headrule}{
+\hbox to\headwidth{
+\color{uteqBlue}
+\leaders\hrule height \headrulewidth\hfill
+}
+}
+
+
+
+\titleformat{\section}
+{\normalfont\Large\bfseries}
+{\thesection}      % ← solo una numeración
+{1em}
+{
+\colorbox{uteqBlue}{
+\parbox{\dimexpr\textwidth-2\fboxsep\relax}{
+\color{white}#1
+}
+}
+}
+
+\titlespacing*{\section}
+{0pt}
+{1.5em}
+{1em}
+
+\titleformat{\subsection}
+{\large\bfseries\color{uteqBlue}}
+{\thesubsection}
+{2em}
+{}
+
+
+\renewcommand{\contentsname}{
+\color{uteqBlue}
+Índice General
+}
+
+\renewcommand{\cftsecfont}{\bfseries}
+\renewcommand{\cftsecpagefont}{\bfseries}
+
+
+
+\tcbset{
+colback=lightBlue,
+colframe=uteqBlue,
+arc=2mm
+}
+
+
+\begin{document}
+
+
+
+\begin{titlepage}
+
+\thispagestyle{empty}
+
+\begin{tikzpicture}[remember picture,overlay]
+
+\fill[uteqBlue]
+(current page.north west)
+rectangle
+([yshift=-3cm]current page.north east);
+
+\fill[uteqBlue]
+(current page.south west)
+rectangle
+([yshift=2cm]current page.south east);
+
+\end{tikzpicture}
+
+\begin{center}
+
+\vspace*{1.3cm}
+
+{\Large\bfseries
+UNIVERSIDAD TÉCNICA ESTATAL DE QUEVEDO
+}
+
+\vspace{0.3cm}
+
+{\large
+FACULTAD DE CIENCIAS DE LA COMPUTACIÓN Y DISEÑO DIGITAL
+}
+
+\vspace{1cm}
+
+\rule{11cm}{0.5pt}
+
+\vspace{0.5cm}
+
+SOFTWARE (REDISEÑO)
+
+\vspace{0.3cm}
+
+APLICACIONES DISTRIBUIDAS [7MO NIVEL] - A
+
+\vspace{0.5cm}
+
+\rule{11cm}{0.5pt}
+
+\vspace{2cm}
+
+{\Huge\bfseries
+Sistema Distribuido para el Control
+}
+
+\vspace{0.2cm}
+
+{\Huge\bfseries
+y Administración de Laboratorios
+}
+
+\vspace{0.2cm}
+
+{\Huge\bfseries
+Informáticos en Entornos Académicos
+}
+
+\vspace{2cm}
+
+\begin{tcolorbox}[width=10cm]
+
+\centering
+\Large
+\textbf{PROYECTO FINAL DE CURSO}
+
+\end{tcolorbox}
+
+\vfill
+
+FECHA ENTREGA
+
+27 MAYO 2026
+
+\vspace{0.7cm}
+
+QUEVEDO — LOS RÍOS
+
+2025–2026
+
+\end{center}
+
+\end{titlepage}
+
+
+
+\newpage
+
+\section{Autores}
+
+\vspace{0.4cm}
+
+\begin{tcolorbox}
+
+\textbf{Freddy Vladimir Farinango Guandinango}
+
+Arquitecto
+
+\vspace{0.4cm}
+
+\textbf{Isaías Abraham Urbina Romero}
+
+Líder de desarrollo
+
+\vspace{0.4cm}
+
+\textbf{Iván Andrés Villamarín Cuenca}
+
+Responsable de calidad
+
+\vspace{0.4cm}
+
+\textbf{Harold Nicolás Vinueza Sánchez}
+
+Responsable de documentación
+
+\end{tcolorbox}
+
+\vspace{0.5cm}
+
+\subsection*{Afiliaciones}
+
+Universidad Técnica Estatal de Quevedo
+
+Ing. Gleiston Cicerón Guerrero Ulloa
+
+
+
+\newpage
+
+\tableofcontents
+
+\newpage
+
+
+
+\section{Resumen}
+
+\begin{tcolorbox}
+
+Integrar principios de aplicaciones distribuidas en un sistema de control de laboratorios informáticos para mejorar la comunicación entre módulos, el acceso concurrente y la administración de recursos académicos.
+
+\vspace{0.2cm}
+
+La propuesta se desarrollará tomando como base un sistema web previamente implementado con PostgreSQL, Java Spring Boot y tecnologías web como HTML, CSS y JavaScript. Sobre esta arquitectura se incorporarán características propias de aplicaciones distribuidas, como separación de servicios, comunicación entre módulos y manejo concurrente de usuarios. Además, se aplicará una adaptación del Proceso Personal del Software (PPS), considerando etapas de análisis, diseño, integración y validación funcional.
+
+\vspace{0.2cm}
+
+El sistema contempla la integración de 5 módulos principales: reservas, asistencia, inventario, reportes técnicos y administración de usuarios. Asimismo, se proyecta soportar múltiples accesos simultáneos dentro de la red universitaria y mejorar la disponibilidad de la información en tiempo real. La propuesta permitirá reducir conflictos de reservas, optimizar el control de recursos y facilitar la gestión académica y técnica de los laboratorios.
+
+\vspace{0.2cm}
+
+La incorporación de aplicaciones distribuidas permitirá transformar un sistema centralizado en una solución más escalable, organizada y eficiente para el entorno universitario. Además, establecerá bases para futuras integraciones con sistemas institucionales y ampliaciones funcionales.
+
+
+\end{tcolorbox}
+
+\vspace{5.5cm}
+
+\textbf{Palabras clave:}
+
+\vspace{0.2cm}
+
+Aplicaciones distribuidas; sistemas de gestión; arquitectura cliente-servidor;
+
+\vspace{0.01cm}
+
+procesamiento concurrente; sistemas web; PostgreSQL; Spring Boot.
+
+
+
+
+
+\section{Abstract}
+
+\begin{tcolorbox}
+
+To integrate distributed application principles into a computer laboratory control system in order to improve module communication, concurrent access, and academic resource management.
+
+\vspace{0.2cm}
+
+The proposal is based on a previously implemented web system developed with PostgreSQL, Java Spring Boot, HTML, CSS, and JavaScript. Distributed application features such as service separation, inter-module communication, and concurrent user management will be incorporated into the existing architecture. In addition, an adaptation of the Personal Software Process (PSP) methodology will be applied through analysis, design, integration, and functional validation stages.
+
+\vspace{0.2cm}
+
+The system includes the integration of 5 main modules: reservations, attendance, inventory, technical reports, and user management. It is also expected to support multiple simultaneous accesses within the university network and improve real-time information availability. The proposal will reduce reservation conflicts, optimize resource control, and facilitate academic and technical laboratory management.
+
+\vspace{0.2cm}
+
+The incorporation of distributed applications will transform a centralized system into a more scalable, organized, and efficient solution for the university environment. Furthermore, it will provide a foundation for future integrations with institutional systems and functional expansions.
+
+
+
+
+\end{tcolorbox}
+
+\vspace{6cm}
+
+\textbf{Keywords:}
+
+\vspace{0.2cm}
+
+distributed applications; management systems; client-server architecture; 
+
+\vspace{0.01cm}
+
+concurrent processing; web systems; PostgreSQL; Spring Boot.
+
+
+
+\section{Introducción}
+
+En la actualidad, los laboratorios informáticos representan un recurso importante dentro de las universidades porque permiten desarrollar prácticas académicas y actividades técnicas. Sin embargo, muchas instituciones todavía presentan problemas en la organización de horarios, control de reservas y seguimiento de equipos. Estas limitaciones generan conflictos en la asignación de laboratorios y dificultades para mantener información actualizada en tiempo real. Además, el crecimiento de usuarios y servicios digitales ha incrementado la necesidad de sistemas más eficientes y escalables dentro del entorno académico.
+
+\vspace{0.2cm}
+
+Actualmente existen diferentes sistemas orientados a la gestión de laboratorios informáticos, enfocados principalmente en reservas, inventario o monitoreo de equipos. Muchas de estas soluciones utilizan arquitecturas web tradicionales que centralizan el procesamiento y almacenamiento de la información. Aunque estos sistemas automatizan ciertos procesos administrativos, todavía presentan limitaciones relacionadas con el acceso concurrente y la comunicación entre módulos. Como resultado, aún existe una brecha en la integración de principios de aplicaciones distribuidas en plataformas universitarias de control de laboratorios.
+
+\vspace{0.2cm}
+
+A partir de esta problemática se plantean las siguientes preguntas de investigación: ¿la incorporación de principios de aplicaciones distribuidas mejora la comunicación entre módulos de un sistema de control de laboratorios informáticos?, y ¿el uso de una arquitectura distribuida permite optimizar el acceso concurrente y la disponibilidad de la información frente a un sistema centralizado? De manera complementaria, se establece la hipótesis de que la integración de servicios distribuidos permitirá mejorar la escalabilidad del sistema y reducir conflictos de acceso. También se espera que este enfoque facilite la administración académica y técnica de los laboratorios universitarios. Estas preguntas servirán como base para el análisis y validación de la propuesta planteada.
+
+\vspace{0.2cm}
+
+La contribución principal de este trabajo consiste en proponer la adaptación de un sistema web previamente desarrollado hacia una arquitectura orientada a aplicaciones distribuidas. La propuesta incorpora mecanismos de comunicación entre servicios, separación funcional de módulos y procesamiento concurrente para optimizar la gestión de reservas, asistencia, inventario y reportes técnicos. Sin embargo, el proyecto se delimita únicamente al análisis, diseño e integración funcional de características distribuidas dentro de un entorno académico controlado. Por tanto, no se contempla la implementación de hardware especializado, inteligencia artificial o integración directa con plataformas institucionales externas.
+
+\vspace{0.2cm}
+
+Finalmente, el documento se organiza en varias secciones relacionadas con el desarrollo de la propuesta. En primer lugar, se presenta el estado del arte sobre sistemas de gestión de laboratorios y aplicaciones distribuidas. Por último, se exponen los objetivos y las posibles líneas de trabajo futuro.
+
+
+
+
+\section{Revisión del estado del arte}
+
+En los últimos años, las universidades han incrementado el uso de sistemas digitales para administrar laboratorios informáticos, reservas académicas y control de recursos tecnológicos. Diversos estudios muestran que la automatización de procesos permite reducir errores administrativos y mejorar la disponibilidad de información para estudiantes y docentes. Las primeras soluciones modernas estuvieron enfocadas principalmente en sistemas web centralizados con módulos básicos de horarios, inventario y registro de usuarios. Sin embargo, muchas de estas plataformas presentan limitaciones cuando múltiples usuarios acceden simultáneamente o cuando diferentes servicios deben compartir información en tiempo real [1], [2].
+
+\vspace{0.2cm}
+
+Un grupo importante de investigaciones se centra en sistemas de gestión académica basados en arquitecturas cliente-servidor tradicionales. Estos trabajos priorizan la facilidad de implementación y el almacenamiento centralizado de datos, permitiendo administrar reservas, reportes técnicos y control de asistencia desde una sola plataforma. Aunque este enfoque simplifica la administración inicial, también puede generar problemas de rendimiento y dependencia de un único punto de acceso. Como consecuencia, la escalabilidad y disponibilidad del sistema pueden verse afectadas cuando aumenta la cantidad de usuarios o procesos concurrentes [3], [4].
+
+\vspace{0.2cm}
+
+Otro conjunto de investigaciones aborda el uso de arquitecturas distribuidas y procesamiento concurrente para mejorar el intercambio de información entre servicios conectados en red. Estos estudios destacan que la separación funcional de módulos permite optimizar tiempos de respuesta y facilitar la ejecución simultánea de múltiples tareas. Además, el uso de componentes distribuidos mejora la tolerancia a fallos y la disponibilidad de los servicios dentro de sistemas complejos. A pesar de estos avances, gran parte de las propuestas analizadas están orientadas a sectores industriales, redes inteligentes o entornos de alto rendimiento computacional, dejando limitada su aplicación en plataformas universitarias de gestión de laboratorios [5], [6].
+
+\vspace{0.2cm}
+
+También se identifican investigaciones relacionadas con servicios distribuidos en entornos de edge computing y almacenamiento compartido. Estos trabajos proponen mecanismos de sincronización, intercambio de datos y distribución de cargas para optimizar el acceso concurrente a la información. Aunque los resultados muestran mejoras en rendimiento y comunicación entre procesos, las soluciones suelen enfocarse en infraestructura avanzada o servicios especializados. Por ello, todavía existe poca evidencia de propuestas distribuidas adaptadas específicamente a sistemas universitarios de control de laboratorios informáticos [7], [8], [9], [10].
+
+\vspace{0.2cm}
+
+En el contexto educativo, varios autores han desarrollado plataformas para reservas de laboratorios, monitoreo de equipos y gestión de inventario académico. La mayoría de estos sistemas integran funciones administrativas básicas y ofrecen interfaces web accesibles para docentes y estudiantes. No obstante, muchos trabajos se concentran únicamente en automatizar tareas específicas y no en mejorar la comunicación entre módulos mediante arquitecturas distribuidas. Esto evidencia una brecha relacionada con la falta de integración de servicios distribuidos en sistemas académicos orientados al control integral de laboratorios [11], [12].
+
+\vspace{0.2cm}
+
+A partir de la revisión realizada, se observa que los trabajos existentes aportan soluciones importantes en automatización, administración de recursos y procesamiento distribuido. Sin embargo, aún permanece sin resolver la integración de principios de aplicaciones distribuidas dentro de un sistema académico que combine reservas, asistencia, inventario y reportes técnicos en una sola arquitectura funcional. La mayoría de investigaciones analizadas abordan únicamente problemas específicos o contextos distintos al entorno universitario. En consecuencia, existe la necesidad de proponer soluciones distribuidas adaptadas a la gestión integral de laboratorios informáticos en instituciones educativas [13], [14], [15].
+
+
+
+
+\section{Tabla comparativa de trabajos relacionados}
+
+\renewcommand{\arraystretch}{1.25}
+
+\scriptsize
+
+\rowcolors{2}{lightBlue}{white}
+
+\begin{longtable}{
+>{\centering\arraybackslash}p{0.7cm}
+>{\raggedright\arraybackslash}p{1.6cm}
+>{\centering\arraybackslash}p{0.8cm}
+>{\raggedright\arraybackslash}p{2.6cm}
+>{\raggedright\arraybackslash}p{2.4cm}
+>{\raggedright\arraybackslash}p{2.2cm}
+>{\raggedright\arraybackslash}p{2.2cm}
+}
+
+\caption{Comparación de investigaciones relacionadas con sistemas distribuidos}
+\\
+
+\toprule
+
+\rowcolor{uteqBlue}
+
+\color{white}\textbf{Cita}
+&
+\color{white}\textbf{Autores}
+&
+\color{white}\textbf{Año}
+&
+\color{white}\textbf{Método}
+&
+\color{white}\textbf{Contexto/Dataset}
+&
+\color{white}\textbf{Métricas}
+&
+\color{white}\textbf{Limitaciones}
+
+\\
+
+\midrule
+\endfirsthead
+
+
+\toprule
+
+\rowcolor{uteqBlue}
+
+\color{white}\textbf{Cita}
+&
+\color{white}\textbf{Autores}
+&
+\color{white}\textbf{Año}
+&
+\color{white}\textbf{Método}
+&
+\color{white}\textbf{Contexto/Dataset}
+&
+\color{white}\textbf{Métricas}
+&
+\color{white}\textbf{Limitaciones}
+
+\\
+
+\midrule
+\endhead
+
+
+[1]&Yu et al.&2020&
+Sistema distribuido de almacenamiento&
+Cámaras y redes distribuidas&
+Privacidad y tolerancia a fallos&
+No orientado a educación\\
+
+[2]&Syed et al.&2021&
+Acoplamiento distribuido en tiempo real&
+Infraestructuras geográficamente distribuidas&
+Sincronización y rendimiento&
+Aplicado a smart grids\\
+
+[3]&Saleem et al.&2020&
+Framework de seguridad distribuida&
+Sistemas energía y control&
+Seguridad y disponibilidad&
+Enfoque energético\\
+
+[4]&Peng et al.&2021&
+Control distribuido por eventos&
+Microredes DC&
+Escalabilidad y estabilidad&
+Infraestructura especializada\\
+
+[5]&Deng y Yang&2019&
+Control adaptativo tolerante fallos&
+Sistemas multiagente lineales&
+Estabilidad cooperativa&
+Contexto industrial\\
+
+[6]&Sturz et al.&2020&
+Control predictivo distribuido&
+Sistemas lineales&
+Tiempo respuesta&
+No integra módulos académicos\\
+
+[7]&Casimiro et al.&2020&
+Aprovisionamiento distribuido&
+Analítica distribuida&
+Eficiencia computacional&
+Orientado a empresas\\
+
+[8]&Xu et al.&2020&
+Caché distribuida servicios&
+Mobile edge-clouds&
+Acceso concurrente&
+No aplicado educación\\
+
+[9]&Mousavi et al.&2020&
+Aprendizaje colaborativo&
+Datos no etiquetados&
+Precisión clasificación&
+Procesamiento imágenes\\
+
+[10]&Li et al.&2021&
+Cadenas Markov difusas&
+Sistemas inteligentes&
+Modelado y observación&
+No gestión académica\\
+
+[11]&Wang et al.&2020&
+Gestión distribuida recursos&
+Hardware-in-the-loop&
+Rendimiento evaluación&
+Aplicación smart grids\\
+
+[12]&Ridgley et al.&2020&
+Promedio distribuido privado&
+Sistemas distribuidos&
+Privacidad sincronización&
+No enfocado educación\\
+
+[13]&Al-Saffar et al.&2020&
+Gestión con aprendizaje reforzado&
+Alta penetración PV&
+Mitigación sobrevoltaje&
+Contexto energético\\
+
+[14]&Stafford y Treiblmaier&2020&
+Blockchain distribuido&
+Registros médicos&
+Compartición segura&
+No aplicado laboratorios\\
+
+[15]&Batalla&2020&
+Transmisión distribuida video&
+Redes WiFi y 5G&
+Calidad transmisión&
+Enfoque IIoT\\
+
+\bottomrule
+
+\end{longtable}
+
+\normalsize
+
+
+\section{Sistema Propuesto}
+
+La propuesta consiste en adaptar el sistema web de control de laboratorios hacia una arquitectura basada en aplicaciones distribuidas. Esto permitirá separar funciones como reservas, inventario, asistencia y reportes en módulos independientes que trabajen conectados entre sí. De esta manera, el sistema podrá atender varios usuarios al mismo tiempo y compartir información en tiempo real.
+
+\vspace{0.2cm}
+
+El módulo de reservas permitirá consultar horarios y solicitar laboratorios desde la plataforma web. El módulo de inventario ayudará a registrar equipos, mobiliario y reportes de fallas técnicas. Además, el sistema almacenará historiales de uso, mantenimientos y actividades realizadas en cada laboratorio.
+
+\vspace{0.2cm}
+
+La plataforma manejará distintos tipos de usuarios. Los estudiantes podrán consultar disponibilidad y realizar reservas, los docentes administrarán actividades académicas y el personal técnico controlará equipos y reportes. Esto permitirá que cada usuario tenga acceso únicamente a las funciones necesarias.
+
+\vspace{0.2cm}
+
+La propuesta se diferencia de otros trabajos porque integra varias funciones académicas dentro de un mismo sistema distribuido. El proyecto se enfocará únicamente en el diseño e integración funcional de los módulos principales dentro de un entorno universitario controlado. 
+
+
+
+
+\section{Objetivo Principal}
+
+Optimizar la gestión de laboratorios informáticos mediante una arquitectura distribuida que mejore la comunicación entre módulos, el acceso simultáneo de usuarios y la administración de recursos académicos.
+
+
+
+\section{Objetivos Específicos}
+
+\begin{itemize}
+
+\item •	Integrar módulos distribuidos para reservas, asistencia, inventario y reportes técnicos.
+
+\item •	Implementar comunicación entre servicios para compartir información en tiempo real.
+
+\item •	Permitir el acceso concurrente de múltiples usuarios sin afectar el rendimiento del sistema.
+
+\item •	Separar funciones del sistema en módulos independientes para mejorar la escalabilidad y mantenimiento.
+
+\item •	Validar el funcionamiento coordinado de los módulos distribuidos dentro de la red universitaria.
+
+\end{itemize}
+
+
+
+\printbibliography
+\section{Bibliografia:}
+[1]	J. Yu, H. Chen, K. Wu, Z. Cai, and J. Cui, “A Distributed Storage System for Robust, Privacy-Preserving Surveillance Cameras,” 2020 IEEE 40th International Conference on Distributed Computing Systems (ICDCS), vol. 2020-November, pp. 1195–1196, Nov. 2020, doi: 10.1109/ICDCS47774.2020.00189.
+
+\vspace{0.2cm}
+
+[2]	M. H. Syed et al., “Real-Time Coupling of Geographically Distributed Research Infrastructures: Taxonomy, Overview, and Real-World Smart Grid Applications,” IEEE Trans. Smart Grid, vol. 12, no. 2, pp. 1747–1760, Mar. 2021, doi: 10.1109/TSG.2020.3033070.
+
+\vspace{0.2cm}
+
+[3]	D. Saleem, A. Sundararajan, A. Sanghvi, J. Rivera, A. I. Sarwat, and B. Kroposki, “A Multidimensional Holistic Framework for the Security of Distributed Energy and Control Systems,” IEEE Syst. J., vol. 14, no. 1, pp. 17–27, Mar. 2020, doi: 10.1109/JSYST.2019.2919464.
+
+\vspace{0.2cm}
+
+[4]	J. Peng, B. Fan, Q. Yang, and W. Liu, “Distributed event-triggered control of dc microgrids,” IEEE Syst. J., vol. 15, no. 2, pp. 2504–2514, Jun. 2021, doi: 10.1109/JSYST.2020.2994532.
+
+\vspace{0.2cm}
+
+[5]	C. Deng and G. H. Yang, “Distributed adaptive fault-tolerant control approach to cooperative output regulation for linear multi-agent systems,” Automatica, vol. 103, pp. 62–68, May 2019, doi: 10.1016/J.AUTOMATICA.2019.01.013.
+
+\vspace{0.2cm}
+
+[6]	Y. R. Sturz, E. L. Zhu, U. Rosolia, K. H. Johansson, and F. Borrelli, “Distributed Learning Model Predictive Control for Linear Systems *,” Proceedings of the IEEE Conference on Decision and Control, vol. 2020-December, pp. 4366–4373, Dec. 2020, doi: 10.1109/CDC42340.2020.9303820.
+
+\vspace{0.2cm}
+
+[7]	M. Casimiro, D. Didona, P. Romano, L. Rodrigues, W. Zwaenepoel, and D. Garlan, “Lynceus: Cost-efficient tuning and provisioning of data analytic jobs,” Proc. Int. Conf. Distrib. Comput. Syst., vol. 2020-November, pp. 56–66, Nov. 2020, doi: 10.1109/ICDCS47774.2020.00047.
+
+\vspace{0.2cm}
+
+[8]	Z. Xu et al., “To cache or not to cache: Stable service caching in mobile edge-clouds of a service market,” Proc. Int. Conf. Distrib. Comput. Syst., vol. 2020-November, pp. 421–431, Nov. 2020, doi: 10.1109/ICDCS47774.2020.00051.
+
+\vspace{0.2cm}
+
+[9]	S. Mousavi, D. Lee, T. Griffin, D. Steadman, and A. Mockus, “Collaborative Learning of Semi-Supervised Clustering and Classification for Labeling Uncurated Data,” Proceedings - International Conference on Image Processing, ICIP, vol. 2020-October, pp. 1716–1720, Oct. 2020, doi: 10.1109/ICIP40778.2020.9191300.
+
+\vspace{0.2cm}
+
+[10]	N. Li, I. Kolmanovsky, A. Girard, and D. Filev, “Fuzzy Encoded Markov Chains: Overview, Observer Theory, and Applications,” IEEE Trans. Syst. Man Cybern. Syst., vol. 51, no. 1, pp. 116–130, Jan. 2021, doi: 10.1109/TSMC.2020.3042960.
+
+\vspace{0.2cm}
+
+[11]	J. Wang et al., “Performance evaluation of distributed energy resource management via advanced hardware-in-the-loop simulation,” 2020 IEEE Power and Energy Society Innovative Smart Grid Technologies Conference, ISGT 2020, Feb. 2020, doi: 10.1109/ISGT45199.2020.9087667.
+
+\vspace{0.2cm}
+
+[12]	I. L. D. Ridgley, R. A. Freeman, K. M. Lynch, and K. M. Lynch, “Private and Hot-Pluggable Distributed Averaging,” IEEE Control Syst. Lett., vol. 4, no. 4, pp. 988–993, Oct. 2020, doi: 10.1109/LCSYS.2020.2996957.
+
+\vspace{0.2cm}
+
+[13]	M. Al-Saffar, M. Al-Saffar, and P. Musilek, “Reinforcement Learning-Based Distributed BESS Management for Mitigating Overvoltage Issues in Systems with High PV Penetration,” IEEE Trans. Smart Grid, vol. 11, no. 4, pp. 2980–2994, Jul. 2020, doi: 10.1109/TSG.2020.2972208.
+
+\vspace{0.2cm}
+
+[14]	T. F. Stafford and H. Treiblmaier, “Characteristics of a Blockchain Ecosystem for Secure and Sharable Electronic Medical Records,” IEEE Trans. Eng. Manag., vol. 67, no. 4, pp. 1340–1362, Nov. 2020, doi: 10.1109/TEM.2020.2973095.
+
+\vspace{0.2cm}
+
+[15]	J. M. Batalla, “On Analyzing Video Transmission over Wireless WiFi and 5G C-Band in Harsh IIoT Environments,” IEEE Access, vol. 8, pp. 118534–118541, 2020, doi: 10.1109/ACCESS.2020.3005641.
+
+\vspace{0.2cm}
+% ====== LINK DEL REPOSITORIO ======
+\subsection*{Repositorio GitHub}
+
+\href{https://github.com/ivillamarinc/aplicaciones-distribuidas}{https://github.com/ivillamarinc/aplicaciones-distribuidas}
+\end{document}
