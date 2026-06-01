@@ -1,0 +1,507 @@
+\documentclass[12pt, a4paper]{article}
+
+% Paquetes 
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel}
+\usepackage{lmodern}
+\usepackage{microtype}
+
+% Geometría
+\usepackage[top=2.5cm, bottom=2.5cm, left=3cm, right=2.5cm]{geometry}
+
+% Tipografía
+\usepackage{palatino}
+\renewcommand{\familydefault}{\rmdefault}
+
+% Color y diseño
+\usepackage[dvipsnames, table]{xcolor}
+\definecolor{azulUTEQ}{RGB}{0, 56, 120}
+\definecolor{grisClaro}{RGB}{240, 243, 247}
+\definecolor{grisLinea}{RGB}{180, 190, 200}
+
+% Encabezados y pies
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\color{azulUTEQ}\textit{Servicios y Microservicios en Aplicaciones Distribuidas}}
+\fancyhead[R]{\small\color{azulUTEQ}UTEQ -- FCCD}
+\fancyfoot[C]{\small\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.0pt}
+
+% Secciones personalizadas
+\usepackage{titlesec}
+\titleformat{\section}
+  {\large\bfseries\color{azulUTEQ}}
+  {\thesection.}{0.7em}{}[\vspace{-4pt}\rule{\linewidth}{0.8pt}\vspace{2pt}]
+
+\titleformat{\subsection}
+  {\normalsize\bfseries\color{azulUTEQ!80}}
+  {\thesubsection.}{0.5em}{}
+
+\titlespacing{\section}{0pt}{16pt}{8pt}
+\titlespacing{\subsection}{0pt}{10pt}{4pt}
+
+% Tablas
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{tabularx}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+
+% Listas
+\usepackage{enumitem}
+\setlist[itemize]{leftmargin=1.5em, itemsep=2pt, topsep=4pt}
+
+% Hipervínculos
+\usepackage[hidelinks, colorlinks=true,
+            linkcolor=azulUTEQ, citecolor=azulUTEQ,
+            urlcolor=azulUTEQ]{hyperref}
+
+% Espaciado entre párrafos
+\setlength{\parskip}{6pt}
+\setlength{\parindent}{0pt}
+
+% Abstract personalizado
+\usepackage{abstract}
+\renewcommand{\abstractnamefont}{\bfseries\color{azulUTEQ}}
+\renewcommand{\abstracttextfont}{\small\itshape}
+\setlength{\absleftindent}{1cm}
+\setlength{\absrightindent}{1cm}
+
+% Caja
+\usepackage{mdframed}
+\mdfdefinestyle{portadaBox}{
+  linecolor=azulUTEQ, linewidth=1.2pt,
+  backgroundcolor=grisClaro,
+  innertopmargin=10pt, innerbottommargin=10pt,
+  innerleftmargin=14pt, innerrightmargin=14pt,
+  roundcorner=4pt
+}
+
+% Nuevo comando doi
+\newcommand{\doi}[1]{\href{https://doi.org/#1}{\texttt{doi:#1}}}
+
+\title{}
+\date{}
+\author{}
+
+\begin{document}
+\thispagestyle{empty}
+
+% PORTADA
+\begin{center}
+  {\color{azulUTEQ}\rule{\linewidth}{2pt}}\\[6pt]
+  {\large\bfseries\color{azulUTEQ}
+    UNIVERSIDAD T\'ECNICA ESTATAL DE QUEVEDO}\\[2pt]
+  {\normalsize\bfseries\color{azulUTEQ}
+    FACULTAD DE CIENCIAS DE LA COMPUTACI\'ON Y DISE\~NO DIGITAL}\\[6pt]
+  {\color{azulUTEQ}\rule{\linewidth}{0.6pt}}
+\end{center}
+
+\vspace{1cm}
+
+\begin{mdframed}[style=portadaBox]
+\begin{center}
+  \textbf{\Large\color{azulUTEQ}
+    SERVICIOS Y MICROSERVICIOS EN\\[4pt]
+    APLICACIONES DISTRIBUIDAS}
+\end{center}
+\end{mdframed}
+
+\vspace{1cm}
+
+\begin{center}
+\begin{tabular}{@{}L{3.5cm} L{9cm}@{}}
+  \textbf{\color{azulUTEQ}Carrera:}    & Ingenier\'ia en Software \\[4pt]
+  \textbf{\color{azulUTEQ}Asignatura:} & Aplicaciones Distribuidas \\[4pt]
+  \textbf{\color{azulUTEQ}Curso:}      & 7mo Software ``A'' \\[4pt]
+  \textbf{\color{azulUTEQ}Docente:}    & Ing. Guerrero Ulloa Gleiston Cicer\'on \\[8pt]
+  \textbf{\color{azulUTEQ}Integrantes:} &
+    Gaibor Rodr\'iguez Jeremy Ruperto \\
+  & Isa\'ias Abraham Urbina Romero \\
+  & Iv\'an Andr\'es Villamar\'in Cuenca \\[8pt]
+  \textbf{\color{azulUTEQ}Per\'iodo:}  & S\'eptimo Semestre 2026--2027 \quad PPA \\
+\end{tabular}
+\end{center}
+
+\vspace{1.5cm}
+\begin{center}
+  {\color{grisLinea}\rule{0.6\linewidth}{0.4pt}}\\[6pt]
+  {\small Quevedo -- Ecuador \quad $|$ \quad 2026}
+\end{center}
+
+\newpage
+
+% RESUMEN
+\begin{abstract}
+Este documento analiza los servicios y microservicios en el contexto de las
+aplicaciones distribuidas. Primero, se explica el servicio como una funci\'on
+disponible dentro de una infraestructura distribuida. Luego, se aborda la
+arquitectura de microservicios como un enfoque que divide una aplicaci\'on en
+componentes peque\~nos, independientes y especializados. Tambi\'en se describen sus
+caracter\'isticas principales, ventajas, retos y diferencias frente a los
+servicios tradicionales. Adem\'as, se presenta un caso aplicado sobre la
+migraci\'on de un sistema monol\'itico hacia microservicios. Finalmente, se
+relacionan los microservicios con principios propios de los sistemas
+distribuidos, como la comunicaci\'on entre nodos, la escalabilidad, la
+tolerancia a fallos y la administraci\'on de componentes independientes.
+
+\medskip
+\noindent\textbf{Palabras clave:} aplicaciones distribuidas, servicios,
+microservicios, arquitectura de software, escalabilidad, tolerancia a fallos.
+\end{abstract}
+\newpage
+\vspace{0.5cm}
+{\color{azulUTEQ}\rule{\linewidth}{0.6pt}}
+
+\tableofcontents
+
+\newpage
+% SECCIONES
+
+\section{Introducci\'on}
+
+En las aplicaciones distribuidas modernas, los servicios y microservicios
+permiten organizar un sistema en componentes que pueden comunicarse a trav\'es de
+la red. Esta forma de dise\~no facilita que una aplicaci\'on no dependa de una sola
+estructura centralizada, sino que pueda distribuir sus funciones en diferentes
+m\'odulos, nodos o entornos de ejecuci\'on \cite{dragoni2017yesterday,
+khole2023distributed}.
+
+El estudio de los microservicios es importante porque permite comprender c\'omo
+se dise\~nan sistemas m\'as flexibles, escalables y mantenibles. Sin embargo, esta
+arquitectura tambi\'en presenta retos t\'ecnicos relacionados con la comunicaci\'on
+entre servicios, la consistencia de datos, la seguridad, el monitoreo y la
+administraci\'on de varios componentes independientes \cite{li2021quality,
+dragoni2017yesterday}.
+
+El presente documento analiza los conceptos de servicio y microservicio, sus
+caracter\'isticas principales, ventajas, desventajas y relaci\'on con las
+aplicaciones distribuidas. Adem\'as, se presenta un caso aplicado que permite
+observar c\'omo estos conceptos pueden emplearse en sistemas reales.
+
+
+\section{?`Qu\'e es un servicio?}
+
+Un servicio puede entenderse como una funci\'on o tarea disponible dentro de una
+infraestructura distribuida que responde a solicitudes de los usuarios para
+procesar informaci\'on o ejecutar una acci\'on espec\'ifica. Los servicios permiten
+ejecutar acciones como procesar informaci\'on, automatizar operaciones o brindar
+respuestas sin que el usuario necesite conocer c\'omo funciona internamente el
+sistema \cite{ascigil2022resource, ramos2021distributed}.
+
+En aplicaciones distribuidas, estos servicios pueden ejecutarse desde distintos
+puntos de la red, adapt\'andose a la demanda y a los recursos disponibles para
+mejorar velocidad, disponibilidad y calidad. Adem\'as, los servicios modernos
+buscan ser m\'as transparentes, escalables y f\'aciles de usar, permitiendo que las
+personas se concentren en obtener resultados y no en controlar toda la l\'ogica
+detr\'as del proceso \cite{ascigil2022resource, ramos2021distributed}.
+
+
+\section{?`Qu\'e son los microservicios?}
+
+Los microservicios son un enfoque de desarrollo de software donde una
+aplicaci\'on se construye a partir de m\'ultiples componentes peque\~nos e
+independientes, cada uno encargado de cumplir una funci\'on espec\'ifica dentro del
+sistema. A diferencia de las aplicaciones tradicionales desarrolladas como una
+sola estructura integrada, los microservicios permiten dividir procesos
+complejos en servicios separados que pueden ejecutarse, actualizarse, escalarse
+y mantenerse de forma individual \cite{zhao2021redundancy, morabito2021demo}.
+\newpage
+Seg\'un Zhao \textit{et al.}\ (2021), cada microservicio puede empaquetarse
+mediante tecnolog\'ias de contenedores y desplegarse de forma distribuida en
+distintos nodos o dispositivos, optimizando la disponibilidad y reduciendo los
+tiempos de respuesta. La distribuci\'on en diferentes puntos de la red permite
+aumentar la tolerancia a fallos y mantener el funcionamiento del sistema
+incluso cuando algunos componentes presentan sobrecarga o interrupciones
+\cite{zhao2021redundancy}.
+
+Por otra parte, Morabito y Chiang (2021) explican que los microservicios
+representan unidades especializadas capaces de trabajar de forma aut\'onoma pero
+coordinada, especialmente en entornos de computaci\'on en el borde. Cada servicio
+puede ejecutar tareas concretas, como reconocimiento facial, detecci\'on de
+objetos o an\'alisis de datos, siendo posible trasladar din\'amicamente la
+ejecuci\'on hacia otros dispositivos cuando existe saturaci\'on de recursos
+\cite{morabito2021demo}.
+
+Asimismo, la arquitectura basada en microservicios incorpora mecanismos de
+orquestaci\'on, descubrimiento autom\'atico de servicios, monitoreo del estado del
+sistema y verificaciones de salud, permitiendo administrar aplicaciones
+distribuidas en tiempo real \cite{zhao2021redundancy, morabito2021demo}.
+
+
+\section{Caracter\'isticas principales de los microservicios}
+
+Los microservicios organizan una aplicaci\'on en componentes peque\~nos, cada uno
+encargado de una funci\'on concreta del sistema. En una aplicaci\'on distribuida,
+esto permite separar procesos como usuarios, pedidos, pagos o notificaciones, y
+hacer que cada parte se comunique con las dem\'as mediante la red. Esta divisi\'on
+se relaciona con atributos de calidad como la mantenibilidad, la disponibilidad
+y la facilidad para realizar cambios en componentes espec\'ificos
+\cite{li2021quality, soylemez2022challenges}.
+
+Otra caracter\'istica importante es que cada microservicio puede desplegarse y
+escalarse de forma independiente. Por ejemplo, si un servicio recibe m\'as
+solicitudes que los dem\'as, se le pueden asignar m\'as recursos sin modificar toda
+la aplicaci\'on \cite{dragoni2017yesterday, tapia2020monolithic}.
+
+Tambi\'en es com\'un que los microservicios aporten flexibilidad t\'ecnica al
+sistema, ya que permiten organizar la aplicaci\'on en componentes que pueden
+adaptarse mejor a sus funciones. Sin embargo, esta forma de arquitectura tambi\'en
+exige controlar aspectos importantes como la integraci\'on, la seguridad, el
+monitoreo y las pruebas \cite{li2021quality, soylemez2022challenges}.
+
+
+\section{Diferencia entre servicios y microservicios}
+
+Un servicio es una unidad de software que ofrece una funci\'on espec\'ifica, como
+consultar datos, validar usuarios o procesar una operaci\'on. En la arquitectura
+orientada a servicios, estos componentes permiten compartir funcionalidades
+entre distintas partes de una aplicaci\'on. Sin embargo, frente a los
+microservicios, este enfoque puede presentar mayor complejidad, acoplamiento y
+dependencia de mecanismos de integraci\'on \cite{raj2021performance,
+soylemez2022challenges}.
+
+Los microservicios son una forma m\'as espec\'ifica de dise\~nar servicios, porque
+buscan mayor autonom\'ia, bajo acoplamiento y responsabilidad definida dentro del
+sistema. Las diferencias m\'as relevantes se presentan en la
+Tabla~\ref{tab:diferencias}.
+
+\vspace{8pt}
+\begin{table}[ht]
+\centering
+\caption{Diferencias entre servicios y microservicios}
+\label{tab:diferencias}
+\small
+\rowcolors{2}{grisClaro}{white}
+\begin{tabularx}{\textwidth}{
+  >{\bfseries\raggedright\arraybackslash}p{2.8cm}
+  >{\raggedright\arraybackslash}p{5.2cm}
+  >{\raggedright\arraybackslash}X
+}
+\toprule
+\rowcolor{azulUTEQ}
+\textbf{\color{white}Aspecto} &
+\textbf{\color{white}Servicio} &
+\textbf{\color{white}Microservicio} \\
+\midrule
+Tama\~no        & Puede abarcar varias funciones dentro del sistema.
+                & Se enfoca en una funci\'on espec\'ifica. \\
+Independencia   & Puede depender m\'as de otros componentes o mecanismos de integraci\'on.
+                & Busca mayor autonom\'ia. \\
+Acoplamiento    & Puede presentar mayor acoplamiento.
+                & Busca bajo acoplamiento. \\
+Despliegue      & Puede estar m\'as ligado a una estructura com\'un.
+                & Puede desplegarse y actualizarse de forma independiente. \\
+Sistemas distribuidos
+                & Comparte funcionalidades entre partes de la aplicaci\'on.
+                & Favorece una arquitectura m\'as modular y flexible. \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+
+\section{Ventajas de los microservicios}
+
+Los microservicios facilitan la evoluci\'on del sistema, ya que la aplicaci\'on se
+divide en componentes m\'as peque\~nos. Esto permite realizar cambios o agregar
+funciones en una parte espec\'ifica sin modificar toda la aplicaci\'on, reduciendo
+el impacto sobre el resto del sistema \cite{dragoni2017yesterday, li2021quality}.
+
+Tambi\'en permiten una escalabilidad m\'as selectiva. Si un componente recibe m\'as
+carga de trabajo, como el servicio de pagos o pedidos en una tienda en l\'inea,
+se puede reforzar solo esa parte del sistema \cite{tapia2020monolithic,
+blinowski2022monolithic}.
+
+Otra ventaja es que pueden mejorar la disponibilidad del sistema, porque la
+separaci\'on de componentes ayuda a limitar el impacto de ciertos fallos. Sin
+embargo, esto depende de que la arquitectura tenga mecanismos adecuados de
+comunicaci\'on, monitoreo y recuperaci\'on \cite{li2021quality,
+soylemez2022challenges}.
+
+Finalmente, ofrecen flexibilidad tecnol\'ogica, debido a que cada componente puede
+usar herramientas o bases de datos acordes con su funci\'on \cite{li2021quality,
+soylemez2022challenges}.
+
+\newpage
+
+\section{Desventajas o retos de los microservicios}
+
+La arquitectura de microservicios, pese a sus ventajas, presenta desaf\'ios que
+los equipos deben considerar antes de adoptarla:
+
+\begin{itemize}
+  \item \textbf{Complejidad operacional:} gestionar varios servicios
+    independientes, cada uno con su propio despliegue y configuraci\'on, eleva
+    la carga de trabajo del equipo de desarrollo
+    \cite{dragoni2017yesterday, waseem2021design}.
+
+  \item \textbf{Latencia de red:} a diferencia de las arquitecturas monol\'iticas
+    donde la comunicaci\'on ocurre en memoria, los microservicios interact\'uan a
+    trav\'es de la red, introduciendo demoras y nuevos puntos de fallo
+    \cite{dragoni2017yesterday, waseem2021design}.
+
+  \item \textbf{Consistencia de datos:} al poseer cada servicio su propia base
+    de datos, garantizar la coherencia entre ellas es complejo, recurriendo
+    generalmente al modelo de consistencia eventual
+    \cite{laigner2021data, pahl2016microservices}.
+
+  \item \textbf{\textit{Testing} e integraci\'on:} validar el comportamiento del
+    sistema completo requiere levantar m\'ultiples servicios de forma simult\'anea,
+    complicando las pruebas de integraci\'on
+    \cite{laigner2021data, pahl2016microservices}.
+\end{itemize}
+
+
+\section{Ejemplo aplicado}
+
+Un caso de estudio documentado acad\'emicamente es la migraci\'on del sistema
+\textit{FX Core} de Danske Bank, uno de los bancos m\'as grandes del norte de
+Europa. El sistema evolucion\'o de una arquitectura monol\'itica hacia
+microservicios, descomponiendo sus funcionalidades en servicios independientes.
+Esta transici\'on demostr\'o mejoras significativas en la escalabilidad, permitiendo
+que cada componente creciera de forma aut\'onoma seg\'un la demanda
+\cite{dragoni2017migration, cerny2018contextual}.
+
+Este mismo principio puede aplicarse en contextos m\'as cotidianos. Una tienda en
+l\'inea, por ejemplo, puede separar sus funcionalidades en servicios de usuarios,
+productos, pedidos y pagos, cada uno con su propia base de datos y
+comunic\'andose a trav\'es de un \textit{API Gateway}, logrando as\'i mayor
+flexibilidad y mantenibilidad \cite{dragoni2017migration, waseem2021design}.
+
+
+\section{Relaci\'on con las aplicaciones distribuidas}
+
+Los microservicios constituyen un caso particular de los sistemas distribuidos:
+sus componentes residen en diferentes nodos de red y colaboran entre s\'i para
+lograr un objetivo com\'un. La diferencia fundamental radica en que los
+microservicios se organizan por dominio de negocio y cada uno es completamente
+aut\'onomo en su despliegue \cite{khole2023distributed, dragoni2017yesterday}.
+
+\newpage
+De los sistemas distribuidos heredan principios esenciales como la tolerancia a
+fallos, la escalabilidad horizontal y el descubrimiento de servicios din\'amico.
+Herramientas como Docker, Kubernetes e Istio hacen posible gestionar esta
+distribuci\'on de manera eficiente y controlada
+\cite{cerny2018contextual, waseem2021design}.
+
+
+\section{Conclusi\'on}
+
+Los servicios y microservicios son elementos importantes dentro de las
+aplicaciones distribuidas, porque permiten organizar un sistema en componentes
+que colaboran entre s\'i mediante la red. Un servicio representa una funci\'on
+espec\'ifica disponible para otros componentes, mientras que un microservicio
+busca mayor independencia, bajo acoplamiento y responsabilidad definida.
+
+El an\'alisis realizado muestra que los microservicios pueden mejorar la
+organizaci\'on y evoluci\'on de una aplicaci\'on distribuida. Sin embargo, tambi\'en
+presentan retos relacionados con la complejidad operativa, la comunicaci\'on por
+red, la consistencia de datos y las pruebas de integraci\'on. Por esta raz\'on, su
+aplicaci\'on debe planificarse de acuerdo con las necesidades reales del sistema.
+
+El caso de Danske Bank demuestra que la migraci\'on hacia microservicios puede
+mejorar la evoluci\'on y escalabilidad de un sistema, pero tambi\'en requiere una
+correcta separaci\'on de responsabilidades. En relaci\'on con las aplicaciones
+distribuidas, este enfoque permite comprender c\'omo varios componentes
+independientes pueden trabajar juntos para cumplir un objetivo com\'un dentro de
+una arquitectura distribuida.
+
+\vspace{6pt}
+\noindent\textbf{Repositorio:} \\
+\url{https://github.com/ivillamarinc/aplicaciones-distribuidas}
+
+% BIBLIOGRAFÍA
+\newpage
+\renewcommand{\refname}{Bibliografía}
+\addcontentsline{toc}{section}{Bibliograf\'ia}
+
+\begin{thebibliography}{17}
+
+\bibitem{ascigil2022resource}
+O.~Ascigil, A.~G. Tasiopoulos, T.~K. Phan, V.~Sourlas, I.~Psaras, and
+  G.~Pavlou, ``Resource Provisioning and Allocation in Function-as-a-Service
+  Edge-Clouds,'' \textit{IEEE Trans. Serv. Comput.}, vol.~15, no.~4,
+  pp.~2410--2424, 2022.
+
+\bibitem{ramos2021distributed}
+J.~Ramos, R.~Ribeiro, D.~Safadinho, J.~Barroso, and R.~F. Lopes,
+  ``Distributed Architecture for Unmanned Vehicle Services,''
+  \textit{Sensors}, vol.~21, no.~4, Art. no.~1477, 2021.
+
+\bibitem{zhao2021redundancy}
+H.~Zhao, S.~Deng, Z.~Liu, J.~Yin, and S.~Dustdar, ``Distributed Redundancy
+  Scheduling for Microservice-Based Applications at the Edge,'' in \textit{Proc.
+  IEEE World Congr. Services (SERVICES)}, Chicago, IL, USA, 2021.
+
+\bibitem{morabito2021demo}
+R.~Morabito and M.~Chiang, ``Demo: Discover, Provision, and Orchestration of
+  Machine Learning Inference Services in Heterogeneous Edge,'' in \textit{Proc.
+  IEEE 41st ICDCS}, Washington, DC, USA, 2021.
+
+\bibitem{li2021quality}
+S.~Li \textit{et al.}, ``Understanding and Addressing Quality Attributes of
+  Microservices Architecture: A Systematic Literature Review,''
+  \textit{Inf. Softw. Technol.}, vol.~131, Art. no.~106449, 2021.
+
+\bibitem{soylemez2022challenges}
+M.~S\"oylemez, B.~Tekinerdogan, and A.~K. Tarhan, ``Challenges and Solution
+  Directions of Microservice Architectures: A Systematic Literature Review,''
+  \textit{Appl. Sci.}, vol.~12, no.~11, Art. no.~5507, 2022.
+
+\bibitem{auer2021monolithic}
+F.~Auer, V.~Lenarduzzi, M.~Felderer, and D.~Taibi, ``From Monolithic Systems
+  to Microservices: An Assessment Framework,'' \textit{Inf. Softw. Technol.},
+  vol.~137, Art. no.~106600, 2021.
+
+\bibitem{tapia2020monolithic}
+F.~Tapia \textit{et al.}, ``From Monolithic Systems to Microservices: A
+  Comparative Study of Performance,'' \textit{Appl. Sci.}, vol.~10, no.~17,
+  Art. no.~5797, 2020.
+
+\bibitem{raj2021performance}
+V.~Raj and R.~Sadam, ``Performance and Complexity Comparison of Service
+  Oriented Architecture and Microservices Architecture,''
+  \textit{Int. J. Commun. Netw. Distrib. Syst.}, vol.~27, no.~1,
+  pp.~100--117, 2021.
+
+\bibitem{blinowski2022monolithic}
+G.~Blinowski, A.~Ojdowska, and A.~Przy\-by\-{\l}ek, ``Monolithic vs. Microservice
+  Architecture: A Performance and Scalability Evaluation,''
+  \textit{IEEE Access}, vol.~10, pp.~20357--20374, 2022.
+
+\bibitem{dragoni2017yesterday}
+N.~Dragoni \textit{et al.}, ``Microservices: Yesterday, Today, and Tomorrow,''
+  in \textit{Present and Ulterior Software Engineering}, Cham: Springer, 2017,
+  pp.~195--216.
+
+\bibitem{waseem2021design}
+M.~Waseem \textit{et al.}, ``Design, Monitoring, and Testing of Microservices
+  Systems: The Practitioners' Perspective,'' \textit{arXiv:2108.03384}, 2021.
+
+\bibitem{laigner2021data}
+R.~Laigner \textit{et al.}, ``Data Management in Microservices: State of the
+  Practice, Challenges, and Research Directions,'' \textit{arXiv:2103.00170},
+  2021.
+
+\bibitem{pahl2016microservices}
+C.~Pahl and P.~Jamshidi, ``Microservices: A Systematic Mapping Study,'' in
+  \textit{Proc. CLOSER 2016}, Rome, Italy, pp.~137--146.
+
+\bibitem{dragoni2017migration}
+N.~Dragoni, S.~Dustdar, S.~T. Larsen, and M.~Mazzara, ``Microservices:
+  Migration of a Mission Critical System,'' \textit{arXiv:1704.04173}, 2017.
+
+\bibitem{cerny2018contextual}
+T.~\v{C}ern\'y, M.~J. Donahoo, and M.~Trnka, ``Contextual Understanding of
+  Microservice Architecture: Current and Future Directions,''
+  \textit{ACM SIGAPP Appl. Comput. Rev.}, vol.~17, no.~4, pp.~29--45, 2018.
+
+\bibitem{khole2023distributed}
+A.~Khole \textit{et al.}, ``A Compendium on Distributed Systems,''
+  \textit{arXiv:2302.03990}, 2023.
+
+\end{thebibliography}
+
+\end{document}
