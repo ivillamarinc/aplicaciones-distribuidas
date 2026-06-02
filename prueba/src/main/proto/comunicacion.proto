@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "ec.edu.uteq.distribuidas.grpc.proto";
+option java_outer_classname = "ComunicacionProto";
+
+service ComunicacionService {
+  rpc EnviarMensaje (MensajeRequest) returns (MensajeResponse);
+}
+
+message MensajeRequest {
+  string sender = 1;
+  int32 timestamp = 2;
+  string message = 3;
+}
+
+message MensajeResponse {
+  string sender = 1;
+  int32 timestamp = 2;
+  string message = 3;
+}
